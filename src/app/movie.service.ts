@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Http } from '@angular/http';
 import { Configuration } from './app.constants';
 import { Movie } from './movie';
 import { environment } from '../environments/environment';
