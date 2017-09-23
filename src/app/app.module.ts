@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { MovieService } from './movie.service';
 import { MovieIndexComponent } from './movie-index/movie-index.component'
 import { Configuration } from './app.constants';
+import { MovieShowComponent } from './movie-show/movie-show.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MovieIndexComponent
+    MovieIndexComponent,
+    MovieShowComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,9 @@
 <div>
-  <a *ngFor="let movie of movies">
+  <a *ngFor="let movie of movies"
+    (click)="onSelect(movie)">
     <div>
       <h4>{{movie.title}}</h4>
     </div>
   </a>
 </div>
+<app-movie-show [movie]="selectedMovie"></app-movie-show>
