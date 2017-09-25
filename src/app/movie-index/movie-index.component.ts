@@ -4,6 +4,8 @@ import { Movie }        from '../movie';
 import { MovieService } from '../movie.service';
 import { Configuration } from '../app.constants';
 
+import 'rxjs/add/operator/toPromise';
+
 @Component({
   selector: 'app-movie-index',
   templateUrl: './movie-index.component.html',
@@ -17,12 +19,12 @@ export class MovieIndexComponent implements OnInit {
 
   getPopularMovies(): void {
     this.movieService.getPopularMovies()
+      .toPromise()
       .then(movies => {
         this.movies = movies.map(value => {
           value['poster_path'] = `${this._configuration.ApiImageUrl}${value['poster_path']}`
           return value;
         });
-
       })
   }
 
