@@ -1,5 +1,5 @@
 <div *ngIf="movie">
-  <h2>{{movie.title}}</h2>
+ <!--  <h2></h2>
   <div>
     {{movie.adult ? 'A' : 'U/A'}}
   </div>
@@ -8,6 +8,19 @@
     {{movie.vote_average}}
   </div>
   <div>
+    
+  </div> -->
+  <div class="media">
     <img [src]="movie.poster_path">
+    <div class="media-body">
+      <h5 class="mt-0">{{movie.title}}</h5>
+      <div>
+        {{movie.adult ? 'A' : 'U/A'}}
+      </div>
+      <div>
+        <label>Rating</label>
+        {{movie.vote_average}}
+      </div>
+    </div>
   </div>
 </div>

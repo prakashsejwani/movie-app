@@ -1,9 +1,11 @@
-<div class="movie-list">
-  <a *ngFor="let movie of movies"
-    (click)="onSelect(movie)">
-    <div>
-      <h4>{{movie.title}}</h4>
-    </div>
-  </a>
+<div class="row">
+	<div class="movie-list col">
+	  <a *ngFor="let movie of movies"
+	    (click)="onSelect(movie)">
+	    <div>
+	      <h4>{{movie.title}}</h4>
+	    </div>
+	  </a>
+	</div>
+	<div class="col"><app-movie-show [movie]="selectedMovie"></app-movie-show></div>
 </div>
-<app-movie-show [movie]="selectedMovie"></app-movie-show>
