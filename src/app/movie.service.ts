@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Configuration } from './app.constants';
 import { Movie } from './movie';
 import { environment } from '../environments/environment';
 
-import 'rxjs/add/operator/toPromise';
+import { Observable }     from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
+
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class MovieService {
@@ -15,16 +20,26 @@ export class MovieService {
     this.actionUrl = _configuration.ServerWithApiUrl;
   }
 
-  getPopularMovies(): Promise<Movie[]> {
+  getPopularMovies (): Observable<Movie[]> {
     return this.http.get(this.actionUrl, {params: this.params})
-               .toPromise()
-               .then(response => response.json().results as Movie[])
-               .catch(this.handleError);
+                    .map(this.extractData)
+                    // .do(data => console.log(data)) // eyeball results in the console
+                    .catch(this.handleError);
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+  private extractData(res: Response) {
+    if (res.status < 200 || res.status >= 300) {
+      throw new Error('Bad response status: ' + res.status);
+    }
+    let body = res.json();
+    return body.results || { };
+  }
+
+  private handleError (error: any) {
+    // In a real world app, we might send the error to remote logging infrastructure
+    let errMsg = error.message || 'Server error';
+    console.error(errMsg); // log to console instead
+    return Observable.throw(errMsg);
   }
 
 }
